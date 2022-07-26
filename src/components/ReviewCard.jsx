@@ -4,7 +4,7 @@ function ReviewCard({ review }) {
       <p>Votes: {review.votes}</p>
       <p>Category: {review.category}</p>
       <p>Posted: {new Date(review.created_at).toLocaleDateString("en-gb")}</p>
-      <h2>{review.title}</h2>
+      <h3>{review.title}</h3>
       <img
         src={review.review_img_url}
         alt={review.title}
