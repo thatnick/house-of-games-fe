@@ -2,7 +2,9 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { getCategories } from "../api";
 
-function FilterSort({ category, setCategory }) {
+function FilterSort() {
+  const ALL_CATEGORIES = "all games";
+  const [category, setCategory] = useState(ALL_CATEGORIES);
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
@@ -12,15 +14,19 @@ function FilterSort({ category, setCategory }) {
   return (
     <div>
       <div>
-        <h2>{category ? category.slug : "All games"}</h2>
+        <h2>{category}</h2>
       </div>
       <ul>
         <li>
-          <Link to={`/`}>All games</Link>
+          <Link to={`/`} onClick={() => setCategory(ALL_CATEGORIES)}>
+            all games
+          </Link>
         </li>
-        {categories.map((category) => (
-          <li key={category.slug}>
-            <Link to={`/categories/${category.slug}`}>{category.slug}</Link>
+        {categories.map(({ slug }) => (
+          <li key={slug}>
+            <Link to={`/categories/${slug}`} onClick={() => setCategory(slug)}>
+              {slug}
+            </Link>
           </li>
         ))}
       </ul>
