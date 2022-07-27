@@ -12,6 +12,12 @@ export const getReviews = (category) => {
     .then((response) => response.data.reviews);
 };
 
+export const getReviewById = (id) => {
+  return axios
+    .get(`${URL}/reviews/${id}`)
+    .then((response) => response.data.review);
+};
+
 export const getCategories = () => {
   return axios
     .get(`${URL}/categories`)

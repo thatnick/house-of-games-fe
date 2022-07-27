@@ -1,8 +1,8 @@
-import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import FilterSort from "./components/FilterSort";
 import ReviewList from "./components/ReviewList";
+import Review from "./components/Review";
 
 function App() {
   return (
@@ -14,7 +14,11 @@ function App() {
           <FilterSort />
           <Routes>
             <Route path="/" element={<ReviewList />} />
-            <Route path="/categories/:categorySlug" element={<ReviewList />} />
+            <Route path="/:categorySlug" element={<ReviewList />} />
+            <Route
+              path="/:categorySlug/:reviewId/:gameTitle"
+              element={<Review />}
+            />
           </Routes>
         </BrowserRouter>
       </main>
