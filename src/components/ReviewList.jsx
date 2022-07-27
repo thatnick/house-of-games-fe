@@ -8,19 +8,14 @@ function ReviewList() {
   const { categorySlug } = useParams();
 
   useEffect(() => {
-    getReviews().then((reviews) => setReviews(reviews));
-  }, []);
+    getReviews(categorySlug).then((reviews) => setReviews(reviews));
+  }, [categorySlug]);
 
   return (
     <div>
-      {reviews.reduce((filteredReviews, review) => {
-        if (!categorySlug || categorySlug === review.category) {
-          filteredReviews.push(
-            <ReviewCard key={review.review_id} review={review} />
-          );
-        }
-        return filteredReviews;
-      }, [])}
+      {reviews.map((review) => (
+        <ReviewCard key={review.review_id} review={review} />
+      ))}
     </div>
   );
 }
