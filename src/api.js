@@ -2,6 +2,18 @@ import axios from "axios";
 
 const URL = "https://nr-house-of-games-api.herokuapp.com/api";
 
-export const getReviews = () => {
-  return axios.get(`${URL}/reviews`).then((response) => response.data.reviews);
+export const getReviews = (category) => {
+  return axios
+    .get(`${URL}/reviews`, {
+      params: {
+        category,
+      },
+    })
+    .then((response) => response.data.reviews);
+};
+
+export const getCategories = () => {
+  return axios
+    .get(`${URL}/categories`)
+    .then((response) => response.data.categories);
 };

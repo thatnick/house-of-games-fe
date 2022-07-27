@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import ReviewCard from "./ReviewCard";
 import { getReviews } from "../api";
 
 function ReviewList() {
   const [reviews, setReviews] = useState([]);
+  const { categorySlug } = useParams();
 
   useEffect(() => {
-    getReviews().then((reviews) => setReviews(reviews));
-  }, []);
-  console.log(reviews);
+    getReviews(categorySlug).then((reviews) => setReviews(reviews));
+  }, [categorySlug]);
+
   return (
     <div>
       {reviews.map((review) => (
