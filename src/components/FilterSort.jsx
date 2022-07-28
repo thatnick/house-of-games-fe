@@ -6,11 +6,9 @@ import useApi from "../hooks/useApi";
 function FilterSort() {
   const ALL_CATEGORIES = "all games";
   const [category, setCategory] = useState(ALL_CATEGORIES);
-  const [categories, setCategories] = useState([]);
 
-  const isLoading = useApi({
+  const [isLoading, categories] = useApi({
     apiCall: getCategories,
-    responseSetter: setCategories,
   });
 
   return (

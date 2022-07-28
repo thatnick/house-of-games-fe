@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useParams } from "react-router-dom";
 import ReviewCard from "./ReviewCard";
 import { getReviewById } from "../api";
@@ -6,11 +5,9 @@ import useApi from "../hooks/useApi";
 
 function Review() {
   const { reviewId } = useParams();
-  const [review, setReview] = useState();
-  const isLoading = useApi({
+  const [isLoading, review] = useApi({
     apiCall: getReviewById,
     argument: reviewId,
-    responseSetter: setReview,
   });
 
   return (
