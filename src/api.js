@@ -23,3 +23,11 @@ export const getCategories = () => {
     .get(`${URL}/categories`)
     .then((response) => response.data.categories);
 };
+
+export const patchReviewVotesById = (review_id, newVotes) => {
+  return axios
+    .patch(`${URL}/reviews/${review_id}`, { inc_votes: newVotes })
+    .then((response) => {
+      return response.data.review.votes;
+    });
+};
