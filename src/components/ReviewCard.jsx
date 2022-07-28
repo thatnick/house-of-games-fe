@@ -1,9 +1,12 @@
 import { Link } from "react-router-dom";
+import VoteButtons from "./VoteButtons";
 
 function ReviewCard({ review, expanded = false }) {
   return (
     <div>
-      <p>Votes: {review.votes}</p>
+      <div>
+        <VoteButtons review_id={review.review_id} votes={review.votes} />
+      </div>
       <p>Category: {review.category}</p>
       <p>Posted: {new Date(review.created_at).toLocaleDateString("en-gb")}</p>
       <h3>

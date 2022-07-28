@@ -8,7 +8,7 @@ function ReviewList() {
 
   const [isLoading, reviews] = useApi({
     apiCall: getReviews,
-    argument: categorySlug,
+    args: [categorySlug],
   });
 
   return (

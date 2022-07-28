@@ -7,7 +7,7 @@ function Review() {
   const { reviewId } = useParams();
   const [isLoading, review] = useApi({
     apiCall: getReviewById,
-    argument: reviewId,
+    args: [reviewId],
   });
 
   return (

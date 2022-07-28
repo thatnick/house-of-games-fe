@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 
-function useApi({ apiCall, argument }) {
+function useApi({ apiCall, args = [] }) {
   const [response, setResponse] = useState();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    apiCall(argument).then((res) => {
-      setResponse(res);
+    apiCall(...args).then((response) => {
+      setResponse(response);
       setIsLoading(false);
     });
-  }, [apiCall, argument]);
+  }, [apiCall, ...args]);
 
   return [isLoading, response];
 }
