@@ -1,21 +1,23 @@
-import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ReviewCard from "./ReviewCard";
 import { getReviews } from "../api";
+import useApi from "../hooks/useApi";
 
 function ReviewList() {
-  const [reviews, setReviews] = useState([]);
   const { categorySlug } = useParams();
 
-  useEffect(() => {
-    getReviews(categorySlug).then((reviews) => setReviews(reviews));
-  }, [categorySlug]);
+  const [isLoading, reviews] = useApi({
+    apiCall: getReviews,
+    argument: categorySlug,
+  });
 
   return (
     <div>
-      {reviews.map((review) => (
-        <ReviewCard key={review.review_id} review={review} />
-      ))}
+      {isLoading
+        ? "Loading reviews..."
+        : reviews.map((review) => (
+            <ReviewCard key={review.review_id} review={review} />
+          ))}
     </div>
   );
 }
