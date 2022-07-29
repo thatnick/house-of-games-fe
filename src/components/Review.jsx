@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import ReviewCard from "./ReviewCard";
 import { getReviewById } from "../api";
 import useApi from "../hooks/useApi";
+import CommentList from "./CommentList";
 
 function Review() {
   const { reviewId } = useParams();
@@ -17,6 +18,7 @@ function Review() {
       ) : (
         <ReviewCard review={review} expanded={true} />
       )}
+      <CommentList reviewId={reviewId} />
     </div>
   );
 }

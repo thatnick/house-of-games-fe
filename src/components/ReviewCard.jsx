@@ -5,7 +5,10 @@ function ReviewCard({ review, expanded = false }) {
     <div>
       <p>Votes: {review.votes}</p>
       <p>Category: {review.category}</p>
-      <p>Posted: {new Date(review.created_at).toLocaleDateString("en-gb")}</p>
+      <p>
+        Posted {new Date(review.created_at).toLocaleDateString("en-gb")} by{" "}
+        {review.owner}
+      </p>
       <h3>
         <Link
           to={`/${review.category}/${
