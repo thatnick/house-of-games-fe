@@ -1,14 +1,21 @@
 import { useContext, useState } from "react";
-import { patchReviewVotesById } from "../api";
+import { getVotesByReviewId, postVotesByReviewId } from "../api";
 import { ErrorContext } from "../contexts/ErrorContext";
+import useApi from "../hooks/useApi";
 
-function VoteButtons({ review_id, votes }) {
+function VoteButtons({ review_id, username, votes }) {
   const [localVotes, setLocalVotes] = useState(votes);
+  const []
   const { setError } = useContext(ErrorContext);
 
+  const [votedIsLoading, voted] = useApi({
+    apiCall: getVotesByReviewId,
+    args: [username, review_id, localVotes],
+  });
+
   const incrementVotes = (newVotes) => {
-    setLocalVotes((currentVotes) => currentVotes + newVotes);
-    patchReviewVotesById(review_id, newVotes).catch(() => {
+    setLocalVotes((currentVotes) => +currentVotes + +newVotes);
+    postVotesByReviewId(username, review_id, newVotes).catch(() => {
       setLocalVotes((currentVotes) => currentVotes - newVotes);
       setError("Your vote couldn't be saved. Please try again later.");
     });
@@ -17,8 +24,11 @@ function VoteButtons({ review_id, votes }) {
   return (
     <div>
       <p>{localVotes} votes</p>
-      <button onClick={() => incrementVotes(1)}>👍</button>
-      <button onClick={() => incrementVotes(-1)}>👎</button>
+      {votedIsLoading ? (
+        "Loading..."
+      ) : (
+        <button onClick={() => incrementVotes(voted ? -1 : 1)}>👍</button>
+      )}
     </div>
   );
 }

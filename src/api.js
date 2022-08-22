@@ -24,10 +24,20 @@ export const getCategories = () => {
     .then((response) => response.data.categories);
 };
 
-export const patchReviewVotesById = (review_id, newVotes) => {
+export const postVotesByReviewId = (username, review_id, inc_votes) => {
   return axios
-    .patch(`${URL}/reviews/${review_id}`, { inc_votes: newVotes })
+    .post(`${URL}/reviews/${review_id}/votes`, {
+      username,
+      review_id,
+      inc_votes,
+    })
+    .then((response) => response.data.review.vote_count);
+};
+
+export const getVotesByReviewId = (username, review_id) => {
+  return axios
+    .get(`${URL}/reviews/${review_id}/votes/${username}`)
     .then((response) => {
-      return response.data.review.votes;
+      return response.data;
     });
 };

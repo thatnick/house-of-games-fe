@@ -5,7 +5,11 @@ function ReviewCard({ review, expanded = false }) {
   return (
     <div>
       <div>
-        <VoteButtons review_id={review.review_id} votes={review.votes} />
+        <VoteButtons
+          username={review.owner}
+          review_id={review.review_id}
+          votes={review.vote_count}
+        />
       </div>
       <p>Category: {review.category}</p>
       <p>Posted: {new Date(review.created_at).toLocaleDateString("en-gb")}</p>
